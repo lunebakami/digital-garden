@@ -85,7 +85,8 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)"],
         serif: ["var(--font-serif)"],
-        mono: ["var(--font-mono)"],
+        mono: ["'Fira Code'", "monospace"],
+        display: ["'Courier Prime'", "monospace"],
       },
       keyframes: {
         "accordion-down": {
