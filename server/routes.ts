@@ -80,15 +80,13 @@ This portfolio is a tribute to the early days of the web.
       slug: "contact",
       title: "Contact.txt",
       content: `
-# Contact Uplink
+# Contact
 
-Initiate communication via the following protocols:
+You can reach me through the following channels:
 
 - **Email**: [me@example.com](mailto:me@example.com)
 - **Twitter**: [@username](https://twitter.com)
 - **GitHub**: [github.com/username](https://github.com)
-
-_End of transmission._
       `
     });
   }

@@ -18,31 +18,6 @@ export function Layout({ children }: { children: ReactNode }) {
       {/* Scanlines Overlay */}
       <div className="fixed inset-0 pointer-events-none z-50 scanlines opacity-20"></div>
 
-      {/* Top Bar - System Status */}
-      <header className="border-b border-white p-2 flex justify-between items-center bg-black sticky top-0 z-40">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2 font-bold bg-white text-black px-2 py-0.5">
-            <Terminal className="w-4 h-4" />
-            <span>SYSTEM_READY</span>
-          </div>
-          <span className="hidden sm:inline text-xs opacity-60">MEM: 64MB OK</span>
-        </div>
-        
-        <div className="flex items-center gap-4 text-xs">
-          <div className="flex items-center gap-2">
-            <Wifi className="w-3 h-3" />
-            <span className="hidden sm:inline">NET_CONNECTED</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Battery className="w-3 h-3" />
-            <span>100%</span>
-          </div>
-          <div className="font-bold border-l border-white pl-3">
-            {currentTime}
-          </div>
-        </div>
-      </header>
-
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col md:flex-row">
         {/* Sidebar Navigation */}
