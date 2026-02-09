@@ -19,7 +19,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <h1 className="text-xl md:text-2xl font-display font-bold uppercase tracking-wider mb-1">
               PORTFOLIO
             </h1>
-            <p className="text-xs opacity-60">v2.0.0.1 [BETA]</p>
+            <p className="text-xs opacity-60">v2.0.0.1</p>
           </div>
 
           <div className="space-y-4">
