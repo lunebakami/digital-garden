@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { usePages } from "@/hooks/use-pages";
-import { Terminal, Square, Monitor, Power, Battery, Wifi } from "lucide-react";
+import { Power } from "lucide-react";
 
 export function Layout({ children }: { children: ReactNode }) {
   const [location] = useLocation();

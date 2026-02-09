@@ -5,46 +5,17 @@
 @tailwind utilities;
 
 :root {
-  --background: 0 0% 0%;
-  --foreground: 0 0% 100%;
-  
-  --card: 0 0% 5%;
-  --card-foreground: 0 0% 100%;
- 
-  --popover: 0 0% 5%;
-  --popover-foreground: 0 0% 100%;
- 
-  --primary: 0 0% 100%;
-  --primary-foreground: 0 0% 0%;
- 
-  --secondary: 0 0% 15%;
-  --secondary-foreground: 0 0% 100%;
- 
-  --muted: 0 0% 20%;
-  --muted-foreground: 0 0% 60%;
- 
-  --accent: 0 0% 25%;
-  --accent-foreground: 0 0% 100%;
- 
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 0 0% 100%;
-
-  --border: 0 0% 100%;
-  --input: 0 0% 20%;
-  --ring: 0 0% 100%;
-
-  --radius: 0px; /* Sharp edges for Y2K brutalism */
-  
   --font-mono: 'Fira Code', monospace;
   --font-display: 'Courier Prime', monospace;
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-white;
   }
+  
   body {
-    @apply bg-background text-foreground font-mono antialiased;
+    @apply bg-black text-white font-mono antialiased;
     background-image: 
       linear-gradient(rgba(20, 20, 20, 0.5) 1px, transparent 1px),
       linear-gradient(90deg, rgba(20, 20, 20, 0.5) 1px, transparent 1px);
@@ -56,7 +27,7 @@
     @apply font-bold tracking-tight uppercase;
   }
 
-  /* Custom Scrollbar for that retro feel */
+  /* Retro scrollbar */
   ::-webkit-scrollbar {
     width: 12px;
     background: #000;
@@ -68,72 +39,38 @@
   }
 }
 
-/* CRT Scanline Effect */
-.scanlines::before {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(18, 16, 16, 0) 50%,
-    rgba(0, 0, 0, 0.1) 50%
-  );
-  background-size: 100% 4px;
-  z-index: 50;
-  pointer-events: none;
-  opacity: 0.6;
-}
-
-/* Flicker Animation */
-@keyframes flicker {
-  0% { opacity: 0.97; }
-  5% { opacity: 0.95; }
-  10% { opacity: 0.9; }
-  15% { opacity: 0.95; }
-  20% { opacity: 1; }
-  50% { opacity: 0.95; }
-  100% { opacity: 0.98; }
-}
-
-.crt-flicker {
-  animation: flicker 0.15s infinite;
-}
-
-/* Glitch effect on hover */
-.glitch-hover:hover {
-  text-shadow: 2px 0 #fff, -2px 0 #666;
-}
-
-/* Markdown Styles */
+/* Markdown styles */
 .prose-invert {
   max-width: none;
 }
+
 .prose-invert p {
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
+
 .prose-invert ul {
   list-style-type: square;
   padding-left: 1.5rem;
   margin-bottom: 1.5rem;
 }
+
 .prose-invert li {
   margin-bottom: 0.5rem;
 }
+
 .prose-invert a {
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
 }
+
 .prose-invert a:hover {
   background-color: white;
   color: black;
   text-decoration: none;
 }
+
 .prose-invert blockquote {
   border-left: 2px solid white;
   padding-left: 1rem;
