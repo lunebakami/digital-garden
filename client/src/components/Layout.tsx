@@ -54,7 +54,7 @@ export function Layout({ children }: { children: ReactNode }) {
               <div>UPTIME:</div>
               <div className="text-right">99.9%</div>
               <div>LOC:</div>
-              <div className="text-right">EARTH</div>
+              <div className="text-right">BRAZIL</div>
             </div>
           </div>
         </nav>
@@ -72,10 +72,6 @@ export function Layout({ children }: { children: ReactNode }) {
         <div className="font-mono">
           <span className="opacity-70">&gt; READY</span>
           <span className="cursor-blink">_</span>
-        </div>
-        <div className="flex gap-4 uppercase">
-          <a href="#" className="hover:underline">Contact</a>
-          <a href="#" className="hover:underline">Legal</a>
         </div>
         <div className="opacity-50">
           © 1999-2025
