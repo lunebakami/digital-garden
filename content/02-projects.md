@@ -5,19 +5,23 @@ title: Projects
 
 # Projects Directory
 
-## web-apps
-- **E-commerce Platforms**: High-traffic B2C platforms built with React, Next.js, Node.js, and Salesforce Commerce Cloud.
-- **Admin Dashboards**: Internal tools and admin panels built with Vue.js and TypeScript.
-- **Payment Systems**: Implemented integrations with Google Pay and transactional workflows.
+## Web Apps
+- **E-commerce Platforms**: Frontend and backend features for large e-commerce products using React, Next.js, and Salesforce Commerce Cloud.
+- **Admin Dashboards**: Admin and internal tools built with Vue.js and TypeScript.
+- **Internal Tools**: Web tools to support operational and design workflows.
 
-## backend-systems
-- **Scalable APIs**: REST APIs and microservices built with Node.js, NestJS, Fastify, and Prisma.
-- **Integrations**: Third-party integrations including DocuSign, Supabase, and external services.
-- **Cloud Services**: Deployed and maintained services on AWS and Azure using Docker and CI/CD pipelines.
+## Backend Systems
+- **APIs & Services**: REST APIs built with Node.js, NestJS, Fastify, and Prisma.
+- **Integrations**: Integrations with third-party services such as DocuSign, Supabase, and external APIs.
+- **Cloud Deployments**: Applications deployed on AWS and Azure using Docker.
 
-## experiments
-- **Architecture Experiments**: Proofs of concept for microservices, authentication flows, and system scalability.
-- **Performance Optimization**: Experiments focused on improving latency and backend reliability.
+## Experiments
+- **Framework Usage**: Practical work with React, Next.js, Vue.js, and NestJS while building real features.
+- **Backend Patterns**: Exploring API structures, authentication flows, and service organization.
+- **Tooling**: Small utilities to support development and debugging.
 
-## contributions
-- Contributed to internal tooling, shared libraries, and collaborative projects in international teams.
+## Contributions
+- **Feature Development**: Contributed to new features and ongoing maintenance.
+- **Bug Fixing & Refactoring**: Improved stability and readability of existing codebases.
+- **Team Collaboration**: Worked closely with designers, product managers, and developers in international teams.
+- **Technical Discussions**: Participated in technical decisions and problem-solving.
