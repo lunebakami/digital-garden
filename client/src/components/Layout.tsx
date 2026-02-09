@@ -13,8 +13,8 @@ export function Layout({ children }: { children: ReactNode }) {
 
       {/* Main Content Area - takes remaining space, content scrolls */}
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-        {/* Sidebar Navigation */}
-        <nav className="w-full md:w-64 border-b md:border-b-0 md:border-r border-white p-4 md:p-6 shrink-0 bg-black overflow-y-auto">
+        {/* Sidebar Navigation - Fixed, no scroll */}
+        <nav className="w-full md:w-64 border-b md:border-b-0 md:border-r border-white p-4 md:p-6 shrink-0 bg-black">
           <div className="mb-8">
             <h1 className="text-xl md:text-2xl font-display font-bold uppercase tracking-wider mb-1">
               PORTFOLIO
