@@ -1,17 +1,10 @@
 import { ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { usePages } from "@/hooks/use-pages";
-import { Power } from "lucide-react";
 
 export function Layout({ children }: { children: ReactNode }) {
   const [location] = useLocation();
   const { data: pages } = usePages();
-
-  const currentTime = new Date().toLocaleTimeString("en-US", { 
-    hour: '2-digit', 
-    minute: '2-digit',
-    hour12: false 
-  });
 
   return (
     <div className="min-h-screen flex flex-col font-mono text-sm crt-flicker selection:bg-white selection:text-black">
@@ -76,9 +69,9 @@ export function Layout({ children }: { children: ReactNode }) {
 
       {/* Footer */}
       <footer className="border-t border-white p-2 flex justify-between items-center text-xs bg-black z-40">
-        <div className="flex items-center gap-2">
-          <Power className="w-3 h-3" />
-          <span>SHUTDOWN</span>
+        <div className="font-mono">
+          <span className="opacity-70">&gt; READY</span>
+          <span className="cursor-blink">_</span>
         </div>
         <div className="flex gap-4 uppercase">
           <a href="#" className="hover:underline">Contact</a>
