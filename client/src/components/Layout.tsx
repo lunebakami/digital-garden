@@ -7,14 +7,14 @@ export function Layout({ children }: { children: ReactNode }) {
   const { data: pages } = usePages();
 
   return (
-    <div className="min-h-screen flex flex-col font-mono text-sm crt-flicker selection:bg-white selection:text-black">
+    <div className="h-screen flex flex-col font-mono text-sm crt-flicker selection:bg-white selection:text-black">
       {/* Scanlines Overlay */}
       <div className="fixed inset-0 pointer-events-none z-50 scanlines opacity-20"></div>
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col md:flex-row">
+      {/* Main Content Area - takes remaining space, content scrolls */}
+      <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
         {/* Sidebar Navigation */}
-        <nav className="w-full md:w-64 border-b md:border-b-0 md:border-r border-white p-4 md:p-6 shrink-0 bg-black">
+        <nav className="w-full md:w-64 border-b md:border-b-0 md:border-r border-white p-4 md:p-6 shrink-0 bg-black overflow-y-auto">
           <div className="mb-8">
             <h1 className="text-xl md:text-2xl font-display font-bold uppercase tracking-wider mb-1">
               PORTFOLIO
@@ -60,7 +60,7 @@ export function Layout({ children }: { children: ReactNode }) {
         </nav>
 
         {/* Content Viewport */}
-        <main className="flex-1 p-4 md:p-8 lg:p-12 overflow-y-auto relative">
+        <main className="flex-1 p-4 md:p-8 lg:p-12 overflow-y-auto">
           <div className="max-w-4xl mx-auto">
              {children}
           </div>
