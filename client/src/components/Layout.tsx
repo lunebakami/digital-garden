@@ -69,10 +69,15 @@ export function Layout({ children }: { children: ReactNode }) {
 
       {/* Footer */}
       <footer className="border-t border-white p-2 flex justify-between items-center text-xs bg-black z-40">
-        <div className="font-mono">
+        <a 
+          href="https://github.com/lunebakami/digital-garden" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="font-mono hover:text-gray-400 transition-colors"
+        >
           <span className="opacity-70">&gt; READY</span>
           <span className="cursor-blink">_</span>
-        </div>
+        </a>
         <div className="opacity-50">
           © 1999-2025
         </div>
