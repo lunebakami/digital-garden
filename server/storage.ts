@@ -9,63 +9,110 @@ export interface IStorage {
 }
 
 export class FileStorage implements IStorage {
-  private filePath: string;
+  private contentDir: string;
 
   constructor() {
-    this.filePath = path.resolve(process.cwd(), "portfolio.md");
+    this.contentDir = path.resolve(process.cwd(), "content");
   }
 
-  private async parseMarkdown(): Promise<Page[]> {
-    try {
-      const content = await fs.readFile(this.filePath, "utf-8");
-      const sections = content.split("---").filter(s => s.trim());
-      
-      return sections.map((section, index) => {
-        const lines = section.trim().split("\n");
-        const titleLine = lines.find(l => l.startsWith("# ")) || "# Untitled";
-        const slugLine = lines.find(l => l.startsWith("slug: ")) || "slug: unknown";
-        
-        const title = titleLine.replace("# ", "").trim();
-        const slug = slugLine.replace("slug: ", "").trim();
-        
-        // Remove the metadata lines from the actual content
-        const markdownContent = lines
-          .filter(l => !l.startsWith("slug: "))
-          .join("\n")
-          .trim();
+  private parseFrontmatter(content: string): { frontmatter: Record<string, string>; body: string } {
+    const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
+    const match = content.match(frontmatterRegex);
+    
+    if (!match) {
+      return { frontmatter: {}, body: content };
+    }
 
-        return {
-          id: index + 1,
-          slug,
-          title,
-          content: markdownContent,
-          updatedAt: new Date()
-        };
-      });
+    const frontmatterText = match[1];
+    const body = match[2].trim();
+
+    const frontmatter: Record<string, string> = {};
+    frontmatterText.split('\n').forEach(line => {
+      const colonIndex = line.indexOf(':');
+      if (colonIndex > 0) {
+        const key = line.substring(0, colonIndex).trim();
+        const value = line.substring(colonIndex + 1).trim();
+        frontmatter[key] = value;
+      }
+    });
+
+    return { frontmatter, body };
+  }
+
+  private async readMarkdownFile(filePath: string, index: number): Promise<Page | null> {
+    try {
+      const content = await fs.readFile(filePath, "utf-8");
+      const { frontmatter, body } = this.parseFrontmatter(content);
+      
+      const filename = path.basename(filePath, '.md');
+      
+      return {
+        id: index + 1,
+        slug: frontmatter.slug || filename,
+        title: frontmatter.title || filename,
+        content: body,
+        updatedAt: frontmatter.updatedAt ? new Date(frontmatter.updatedAt) : new Date()
+      };
     } catch (error) {
-      console.error("Error reading portfolio.md:", error);
-      return [];
+      console.error(`Error reading ${filePath}:`, error);
+      return null;
     }
   }
 
   async getPageBySlug(slug: string): Promise<Page | undefined> {
-    const pages = await this.parseMarkdown();
+    const filePath = path.join(this.contentDir, `${slug}.md`);
+    
+    // Try to read the specific file first
+    try {
+      await fs.access(filePath);
+      const page = await this.readMarkdownFile(filePath, 0);
+      if (page && page.slug === slug) {
+        return page;
+      }
+    } catch {
+      // File doesn't exist, fall through to search all files
+    }
+
+    // Search through all files to find matching slug in frontmatter
+    const pages = await this.getAllPages();
     return pages.find(p => p.slug === slug);
   }
 
   async getAllPages(): Promise<Page[]> {
-    return await this.parseMarkdown();
+    try {
+      const files = await fs.readdir(this.contentDir);
+      const markdownFiles = files.filter(f => f.endsWith('.md'));
+      
+      const pages: Page[] = [];
+      for (let i = 0; i < markdownFiles.length; i++) {
+        const filePath = path.join(this.contentDir, markdownFiles[i]);
+        const page = await this.readMarkdownFile(filePath, i);
+        if (page) {
+          pages.push(page);
+        }
+      }
+      
+      return pages.sort((a, b) => a.id - b.id);
+    } catch (error) {
+      console.error("Error reading content directory:", error);
+      return [];
+    }
   }
 
   async createPage(insertPage: InsertPage): Promise<Page> {
-    // For a file-based system, we'll just return what would be created
-    // or tell the user to edit the file.
-    const pages = await this.parseMarkdown();
+    const pages = await this.getAllPages();
     const newPage = {
       ...insertPage,
       id: pages.length + 1,
       updatedAt: new Date()
     };
+    
+    // Write the new page to a markdown file
+    const filePath = path.join(this.contentDir, `${newPage.slug}.md`);
+    const content = `---\nslug: ${newPage.slug}\ntitle: ${newPage.title}\nupdatedAt: ${newPage.updatedAt.toISOString()}\n---\n\n${newPage.content}`;
+    
+    await fs.writeFile(filePath, content, "utf-8");
+    
     return newPage;
   }
 }
