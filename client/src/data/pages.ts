@@ -5,62 +5,60 @@ export interface Page {
   content: string;
 }
 
-export const pages: Page[] = [
-  {
-    id: 1,
-    slug: "home",
-    title: "Index",
-    content: `# Welcome to My Digital Garden
+interface Frontmatter {
+  slug: string;
+  title: string;
+}
 
-> "Simplicity is the ultimate sophistication."
+function parseFrontmatter(content: string): { frontmatter: Frontmatter; body: string } {
+  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  
+  if (!match) {
+    return { 
+      frontmatter: { slug: '', title: '' }, 
+      body: content 
+    };
+  }
 
-## About Me
-I am a creative developer who loves minimalism and retro aesthetics. 
-This portfolio is a tribute to the early days of the web.
+  const frontmatterText = match[1];
+  const body = match[2].trim();
 
-## Skills
-- **Frontend**: React, TypeScript, Tailwind
-- **Backend**: Node.js, PostgreSQL
-- **Design**: Minimalist, Brutalist
+  const frontmatter: Partial<Frontmatter> = {};
+  frontmatterText.split('\n').forEach(line => {
+    const colonIndex = line.indexOf(':');
+    if (colonIndex > 0) {
+      const key = line.substring(0, colonIndex).trim() as keyof Frontmatter;
+      const value = line.substring(colonIndex + 1).trim();
+      frontmatter[key] = value;
+    }
+  });
 
-## Latest Projects
-1. [Project Alpha](#) - A retro game engine
-2. [Project Beta](#) - CLI tool for designers
-3. [Project Gamma](#) - Monochrome photo gallery
+  return { 
+    frontmatter: frontmatter as Frontmatter, 
+    body 
+  };
+}
 
----
-*Last updated: 1999-12-31*`,
-  },
-  {
-    id: 2,
-    slug: "projects",
-    title: "Projects",
-    content: `# Projects Directory
+// Dynamically import all markdown files
+const markdownFiles = import.meta.glob('../../../content/*.md', { 
+  query: '?raw', 
+  import: 'default',
+  eager: true 
+}) as Record<string, string>;
 
-## /src/web-apps
-- **E-commerce Platform**: A headless shopify implementation.
-- **Social Graph**: A graph database visualization.
-
-## /src/experiments
-- **CSS Art**: Pure CSS drawings.
-- **WebGL Shaders**: 3D experiments.
-
-## /src/contributions
-- Contributed to several open source libraries.`,
-  },
-  {
-    id: 3,
-    slug: "contact",
-    title: "Contact",
-    content: `# Contact
-
-You can reach me through the following channels:
-
-- **Email**: [me@example.com](mailto:me@example.com)
-- **Twitter**: [@username](https://twitter.com)
-- **GitHub**: [github.com/username](https://github.com)`,
-  },
-];
+// Build pages array from imported files
+let pageId = 1;
+const pages: Page[] = Object.entries(markdownFiles).map(([path, content]) => {
+  const { frontmatter, body } = parseFrontmatter(content);
+  const filename = path.split('/').pop()?.replace('.md', '') || '';
+  
+  return {
+    id: pageId++,
+    slug: frontmatter.slug || filename,
+    title: frontmatter.title || filename,
+    content: body,
+  };
+});
 
 export function getAllPages(): Page[] {
   return pages;
