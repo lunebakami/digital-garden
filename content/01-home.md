@@ -3,7 +3,7 @@ slug: home
 title: Index
 ---
 
-# Welcome
+# Welcome to Luis' Digital Garden
 
 > "Build things that scale, learn constantly, and keep it simple."
 

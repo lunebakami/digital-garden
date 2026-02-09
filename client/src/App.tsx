@@ -1,10 +1,12 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Router as WouterRouter } from "wouter";
 import { Layout } from "@/components/Layout";
 import Home from "@/pages/Home";
 import DynamicPage from "@/pages/DynamicPage";
 import NotFound from "@/pages/not-found";
 
-function Router() {
+const basePath = "/digital-garden";
+
+function Routes() {
   return (
     <Switch>
       <Route path="/">
@@ -27,7 +29,11 @@ function Router() {
 }
 
 function App() {
-  return <Router />;
+  return (
+    <WouterRouter base={basePath}>
+      <Routes />
+    </WouterRouter>
+  );
 }
 
 export default App;
