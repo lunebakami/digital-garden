@@ -1,9 +1,9 @@
 ---
-slug: projects
-title: Projects
+slug: experiences
+title: Experiences
 ---
 
-# Projects Directory
+# Experiences Directory
 
 ## Web Apps
 - **E-commerce Platforms**: Frontend and backend features for large e-commerce products using React, Next.js, and Salesforce Commerce Cloud.

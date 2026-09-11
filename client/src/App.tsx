@@ -1,6 +1,7 @@
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { Layout } from "@/components/Layout";
 import Home from "@/pages/Home";
+import Projects from "@/pages/Projects";
 import DynamicPage from "@/pages/DynamicPage";
 import NotFound from "@/pages/not-found";
 
@@ -12,6 +13,12 @@ function Routes() {
       <Route path="/">
         <Layout>
           <Home />
+        </Layout>
+      </Route>
+
+      <Route path="/projects">
+        <Layout>
+          <Projects />
         </Layout>
       </Route>
       
