@@ -85,8 +85,9 @@ Your content here...
 
 **File naming:** Use numerical prefixes to control sidebar order:
 - `01-home.md` - Appears first
-- `02-projects.md` - Appears second
-- `03-contact.md` - Appears third
+- `02-experiences.md` - Appears second
+- `03-projects.md` - Appears third
+- `04-contact.md` - Appears fourth
 
 ### Adding ASCII Logos
 
@@ -134,8 +135,9 @@ Edit `client/index.html` to update:
 │       └── favicon.png
 ├── content/                # Markdown content files
 │   ├── 01-home.md
-│   ├── 02-projects.md
-│   └── 03-contact.md
+│   ├── 02-experiences.md
+│   ├── 03-projects.md
+│   └── 04-contact.md
 ├── ascii/                  # ASCII art logos
 │   └── logo1.txt
 ├── .github/

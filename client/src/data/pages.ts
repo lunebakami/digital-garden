@@ -48,9 +48,11 @@ const markdownFiles = import.meta.glob('../../../content/*.md', {
 
 // Build pages array from imported files
 let pageId = 1;
-const pages: Page[] = Object.entries(markdownFiles).map(([path, content]) => {
+const pages: Page[] = Object.entries(markdownFiles)
+  .sort(([left], [right]) => left.localeCompare(right))
+  .map(([path, content]) => {
   const { frontmatter, body } = parseFrontmatter(content);
-  const filename = path.split('/').pop()?.replace('.md', '') || '';
+  const filename = path.split("/").pop()?.replace(".md", "") || "";
   
   return {
     id: pageId++,
